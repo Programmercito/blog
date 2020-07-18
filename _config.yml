@@ -22,8 +22,8 @@ title: BLOG devtecPRO
 email: devtecpro@outlook.com
 description: >- # this means to ignore newlines until "baseurl:"
   Tecnología disponible para todos
-baseurl: "blog.devtecpro.com" # the subpath of your site, e.g. /blog
-url: "devtecpro.com" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: devtecpro
 github_username:  programmercito
 

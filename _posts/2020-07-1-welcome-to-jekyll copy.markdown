@@ -4,7 +4,8 @@ title:  "Oauth 2 para Humanos"
 date:   2020-07-18 22:13:43 -0400
 categories: oauth2 oauth programación programadores java auth
 ---
-!(/assets/oauth.png)
+![oauth 2](/assets/oauth.png){:class="img-responsive"}
+
 Oauth, como dice en su página oficial Oauth es un framework de autorización, que quiere decir esto, que es un framework preparado para mejorar la seguridad, y la forma de entrar y pedir un recurso en el servidor de una manera mas segura que solo enviar el usuario y la contraseña en un servicio o servidor.
 
 Simple pero pero comencemos con las confusiones en su manera de venderse, extracto una parte traducida de su web oficial: " Oauth2 es un framework de autorización que permiste a aplicaciones de terceras partes obtener un limitado acceso a un servicio http" cualquier con este afirmación puede pensar, que si lee eso en la portada de su sitio esto solo sirve para dar permiso a aplicaciones de terceros a tu servicio, pero, no es cierto otra parte del sitio tambien nos dice: " Un protocolo abierto que permiste asegurar la autorización en un simple y standar metodo para web, mobile y aplicaciones de escritorio"

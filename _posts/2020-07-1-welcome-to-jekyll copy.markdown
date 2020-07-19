@@ -40,7 +40,7 @@ Existen dos formas de explicar como funciona el protocolo , una es explicar el 
 
 Observemos el siguiente diagrama extraido del propio standar:
 
-!(/assets/oauth2.png)
+![oauth 2](/assets/oauth2.png){:class="img-responsive"}
 
 ### Diagrama de información Abstracto
 
@@ -52,7 +52,7 @@ Bien, como comienza todo, al usuario se le presenta un login para poder enviar s
 
 Una ves dentro el cliente recibe los tokens para el tratamiento de los recursos de la siguiente manera, primeramente reflejado en el siguiente grafico tomado del mismo standar.
 
-!(/assets/oauth3.png)
+![oauth 2](/assets/oauth3.png){:class="img-responsive"}
 
 ### Refrescando y token expirado
 

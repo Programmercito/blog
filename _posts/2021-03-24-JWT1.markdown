@@ -29,3 +29,7 @@ Un JWT es un token que se puede enviar a un servidor por headers o cookies genel
 * Header protected
 * Paypload 
 * sign
+
+Estas tres partes son representadas por una cadena larga que contiene a las tres partes por ejemplo:
+
+payload.header.sign

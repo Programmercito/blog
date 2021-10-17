@@ -55,7 +55,7 @@ sus partes seperadas por un "." (punto), nos describen las tres partes, el heade
 
 ![flujo de jwt](/assets/flujojwt.png){:class="img-responsive"}
 
-finalmente en el caso que un jwt haya fallado en su validez, el servidor de recursos deberia dar errores adecuados para que los clientes puedan interpretarlos, y si es lo contrario, el recurso deberia ser procesado y devuelvo como el consumo se lo ha requerido.
+Finalmente en el caso que un jwt haya fallado en su validez, el servidor de recursos deberia dar errores adecuados para que los clientes puedan interpretarlos, y si es lo contrario, el recurso deberia ser procesado y devuelvo como el consumo se lo ha requerido.
 
 Fuentes:
 

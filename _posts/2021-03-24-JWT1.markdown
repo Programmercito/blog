@@ -27,9 +27,38 @@ Sin embargo nos preguntamos como un token que contiene esta informacion es envia
 Un JWT es un token que se puede enviar a un servidor por headers o cookies genelramente esta constituido de tres partes:
 
 * Header protected
-* Paypload 
+* Payload 
 * sign
 
 Estas tres partes son representadas por una cadena larga que contiene a las tres partes por ejemplo:
 
 payload.header.sign
+
+donde:
+payload - es el mensaje en si, los datos para que el uso del JWT 
+Sign - es un texto inentendible que sirve para verificar la autenticidad de el mensaje completo
+header protected - es una cabecera tiene datos del JWT basicos generalmente contiene le algoritmo de firma, su tamaño y otras cosas del mensaje como el firmante o algun dato util que no conlleve contenido del mensaje
+
+Hasta ahi es la base del JWT sin enbargo el contenido tambine se estandarizo aunque no es obligatorio utilizarlo dado el amplio espectro de uso que puede tener un JWT, sin embargo cuando hay un contexto de seguridad, estos datos son recomendados para usarse en los sistemas (llamados Claims).
+
+Los mas comunes son:
+
+exp, nbf, iss, aud, prn, jti, typ
+
+Una ves se tiene todo, nos falta explicar como funciona un JWT que hace, en su momento para que sirve, primero veamos el resultado un JWT , como se ve, como se dijo mas arriba es una cadena de alfanumericos que sirven para autentificar en un servicio, un ejemplo seria:
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+sus partes seperadas por un "." (punto), nos describen las tres partes, el header, el payload, y la firma. Una ves se lo tiene armando va con un header en servicios o apis normales y en webs podrian ir en cookies o en headers depende de como este desarrollado un sistema, una ves llegando al servidor esta firma es validada para saber si el JWT es valido o no, si esta firma, su fecha y algun otro mecanismo de seguridad propio es valido, el payload es dado por valido y procesado para ver la validez del resto del mensaje HTTP pueda ser procesado con total confianza por el servidor de recursos.
+
+![flujo de jwt](/assets/flujojwt.png){:class="img-responsive"}
+
+finalmente en el caso que un jwt haya fallado en su validez, el servidor de recursos deberia dar errores adecuados para que los clientes puedan interpretarlos, y si es lo contrario, el recurso deberia ser procesado y devuelvo como el consumo se lo ha requerido.
+
+Fuentes:
+
+
+https://jwt.io/
+https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html
+https://openid.net/specs/draft-jones-json-web-token-07.html#anchor4
+

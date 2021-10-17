@@ -47,7 +47,9 @@ exp, nbf, iss, aud, prn, jti, typ
 
 Una ves se tiene todo, nos falta explicar como funciona un JWT que hace, en su momento para que sirve, primero veamos el resultado un JWT , como se ve, como se dijo mas arriba es una cadena de alfanumericos que sirven para autentificar en un servicio, un ejemplo seria:
 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ
+.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 
 sus partes seperadas por un "." (punto), nos describen las tres partes, el header, el payload, y la firma. Una ves se lo tiene armando va con un header en servicios o apis normales y en webs podrian ir en cookies o en headers depende de como este desarrollado un sistema, una ves llegando al servidor esta firma es validada para saber si el JWT es valido o no, si esta firma, su fecha y algun otro mecanismo de seguridad propio es valido, el payload es dado por valido y procesado para ver la validez del resto del mensaje HTTP pueda ser procesado con total confianza por el servidor de recursos.
 

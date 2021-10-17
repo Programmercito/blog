@@ -55,7 +55,19 @@ sus partes seperadas por un "." (punto), nos describen las tres partes, el heade
 
 ![flujo de jwt](/assets/flujojwt.png){:class="img-responsive"}
 
-Finalmente en el caso que un jwt haya fallado en su validez, el servidor de recursos deberia dar errores adecuados para que los clientes puedan interpretarlos, y si es lo contrario, el recurso deberia ser procesado y devuelvo como el consumo se lo ha requerido.
+Como se puede observar la imagen es una abstrasacción de como se envia en la realidad pueden ser diferentes maneras por ejemplo si solo se envia como un header podria ser enviado:
+
+Authorization: JWT header.payload.sign
+Authorization: bearer header.payload.sign
+Authorization: nombrepersonalizado header.payload.sign
+JWT: header.payload.sign
+
+la mejor manera y la mas entendible para usar vendria a ser:
+
+Authorization: JWT header.payload.sign
+
+Finalmente en el caso que un jwt haya fallado en su validez, el servidor de recursos deberia dar errores adecuados para que los clientes puedan interpretarlos, y si es lo contrario, el recurso deberia ser procesado y devuelvo como el consumo se lo ha requerido. 
+
 
 Fuentes:
 

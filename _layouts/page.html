@@ -1,7 +1,35 @@
 ---
 layout: default
 ---
-<article>
-  {% include meta.html post=page %}
-  {{ content }}
-</article>
+
+<div id="editor-split-pane" class="editor-split-pane">
+  
+  <!-- Left Side: Source Code Editor -->
+  <div class="editor-pane pane-code">
+    <div class="code-editor-wrapper">
+      <!-- Line numbers populated by vscode.js -->
+      <div class="code-line-numbers"></div>
+      
+      <!-- Code body -->
+      <div class="code-content">
+<pre><code class="language-markdown">---
+title: "{{ page.title }}"
+layout: page
+{% if page.file %}file: "{{ page.file }}"{% endif %}
+---
+
+{{ page.content | escape }}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Live Preview -->
+  <div class="editor-pane pane-preview">
+    <article>
+      <h1>{{ page.title }}</h1>
+      {{ content }}
+    </article>
+  </div>
+  
+</div>
+

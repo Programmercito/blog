@@ -1,13 +1,51 @@
 ---
 title: "Archive"
 layout: default
+file: "archive.html"
 ---
 
-<main>
-  <header><h1>{{ include.title | default: page.title }}</h1></header>
-  <nav class="smooth">
-    {% for post in site.posts %}
-    <div><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
-    {% endfor %}
-  </nav>
-</main>
+<div id="editor-split-pane" class="editor-split-pane">
+  
+  <!-- Left Side: Source HTML Code -->
+  <div class="editor-pane pane-code">
+    <div class="code-editor-wrapper">
+      <!-- Line numbers populated by vscode.js -->
+      <div class="code-line-numbers"></div>
+      
+      <!-- Code body -->
+      <div class="code-content">
+<pre><code class="language-html">&lt;!-- Archive of all blog posts --&gt;
+&lt;main&gt;
+  &lt;h1&gt;Archive&lt;/h1&gt;
+  &lt;nav&gt;
+    {% raw %}{% for post in site.posts %}{% endraw %}
+      &lt;div&gt;
+        &lt;time&gt;{{ "{{" }} post.date | date: "%Y-%m-%d" {{ "}}" }}&lt;/time&gt;
+        &lt;a href="{{ "{{" }} post.url | relative_url {{ "}}" }}"&gt;
+          {{ "{{" }} post.title {{ "}}" }}
+        &lt;/a&gt;
+      &lt;/div&gt;
+    {% raw %}{% endfor %}{% endraw %}
+  &lt;/nav&gt;
+&lt;/main&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Live Preview -->
+  <div class="editor-pane pane-preview">
+    <main>
+      <h1>{{ page.title }}</h1>
+      <nav style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+        {% for post in site.posts %}
+        <div style="display: flex; gap: 20px; align-items: baseline; padding: 8px 12px; border-radius: 4px; background: rgba(255,255,255,0.01);">
+          <time datetime="{{ post.date | date_to_xmlschema }}" style="font-family: var(--font-mono); color: var(--dracula-comment); font-size: 13px; width: 90px; flex-shrink: 0;">{{ post.date | date: "%Y-%m-%d" }}</time>
+          <a href="{{ post.url | relative_url }}" style="font-size: 16px; font-weight: 500;">{{ post.title }}</a>
+        </div>
+        {% endfor %}
+      </nav>
+    </main>
+  </div>
+  
+</div>
+

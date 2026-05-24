@@ -2,22 +2,70 @@
 layout: default
 ---
 
-<article>
-  {% include meta.html post=page %}
-  {{ content }}
-  {% if site.comments.isso_domain or site.comments.disqus_shortname %}
-    <hr>
-    {% if site.comments.isso_domain %}<div id="isso-thread"></div>{% endif %}
-    {% if site.comments.disqus_shortname %}<div id="disqus_thread"></div>{% endif %}
-    <noscript>Please enable JavaScript to view comments.</noscript>
-  {% endif %}
-</article>
+<div id="editor-split-pane" class="editor-split-pane">
+  
+  <!-- Left Side: Source Code Editor -->
+  <div class="editor-pane pane-code">
+    <div class="code-editor-wrapper">
+      <!-- Line numbers populated by vscode.js -->
+      <div class="code-line-numbers"></div>
+      
+      <!-- Code body -->
+      <div class="code-content">
+<pre><code class="language-markdown">---
+title: "{{ page.title }}"
+date: {{ page.date | date: "%Y-%m-%d" }}
+layout: post
+{% if page.author %}author: "{{ page.author }}"{% endif %}
+---
 
-{% unless site.show_minimal or site.footer  %}
-{% if page.next.url or page.previous.url %}
-<footer class="nowrap {% if site.show_frame %}dark{% else %}smooth{% endif %}">
-  {% if page.next.url %}<a href="{{ page.next.url | relative_url }}">« {{ page.next.title }}</a> {% endif %}
-  {% if page.previous.url %} <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }} »</a>{% endif %}
-</footer>
-{% endif %}
-{% endunless %}
+{{ page.content | escape }}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Markdown Live Preview -->
+  <div class="editor-pane pane-preview">
+    <article>
+      <h1>{{ page.title }}</h1>
+      <div class="post-metadata">
+        <span>
+          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          {{ page.date | date: "%B %d, %Y" }}
+        </span>
+        {% if page.author %}
+        <span>
+          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          {{ page.author }}
+        </span>
+        {% endif %}
+      </div>
+
+      {{ content }}
+
+      {% if site.comments.isso_domain or site.comments.disqus_shortname %}
+        <hr style="border: 0; border-top: 1px solid var(--border-light); margin: 30px 0;">
+        {% if site.comments.isso_domain %}<div id="isso-thread"></div>{% endif %}
+        {% if site.comments.disqus_shortname %}<div id="disqus_thread"></div>{% endif %}
+        <noscript>Please enable JavaScript to view comments.</noscript>
+      {% endif %}
+    </article>
+
+    {% unless site.show_minimal or site.footer %}
+      {% if page.next.url or page.previous.url %}
+        <footer class="nowrap" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between;">
+          {% if page.next.url %}
+            <a href="{{ page.next.url | relative_url }}">« {{ page.next.title }}</a>
+          {% else %}
+            <div></div>
+          {% endif %}
+          {% if page.previous.url %}
+            <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }} »</a>
+          {% endif %}
+        </footer>
+      {% endif %}
+    {% endunless %}
+  </div>
+  
+</div>
+

@@ -2,34 +2,24 @@
 layout: default
 ---
 
-<div id="editor-split-pane" class="editor-split-pane">
-  
-  <!-- Left Side: Source Code Editor -->
-  <div class="editor-pane pane-code">
-    <div class="code-editor-wrapper">
-      <!-- Line numbers populated by vscode.js -->
-      <div class="code-line-numbers"></div>
-      
-      <!-- Code body -->
-      <div class="code-content">
-<pre><code class="language-markdown">---
-title: "{{ page.title }}"
-layout: page
-{% if page.file %}file: "{{ page.file }}"{% endif %}
----
-
-{{ page.content | escape }}</code></pre>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right Side: Live Preview -->
-  <div class="editor-pane pane-preview">
-    <article>
-      <h1>{{ page.title }}</h1>
-      {{ content }}
-    </article>
-  </div>
-  
+<div class="file-info-bar">
+  <svg viewBox="0 0 16 16" version="1.1" aria-hidden="true">
+    <path fill-rule="evenodd" d="M3 1.75C3 .784 3.784 0 4.75 0h6.5A1.75 1.75 0 0113 1.75v12.5A1.75 1.75 0 0111.25 16H4.75A1.75 1.75 0 013 14.25V1.75zM4.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h6.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25h-6.5z"></path>
+    <path fill-rule="evenodd" d="M11 5H5V3.5h6V5zm0 3H5V6.5h6V8zm0 3H5V9.5h6V11z"></path>
+  </svg>
+  <span class="file-path">
+    {% if page.file %}
+      {{ page.file }}
+    {% else %}
+      {{ page.title | downcase | replace: " ", "-" }}.md
+    {% endif %}
+  </span>
 </div>
 
+<article>
+  <h1>{{ page.title }} <span class="title-comment">// static_page</span></h1>
+  
+  <div style="margin-top: 1.5rem;">
+    {{ content }}
+  </div>
+</article>

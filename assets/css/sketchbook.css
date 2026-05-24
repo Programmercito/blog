@@ -1,0 +1,519 @@
+/* Code Sketchbook / Git Minimalist Stylesheet */
+
+:root {
+  /* GitHub Dark Color Palette */
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-subtle: #21262d;
+  --bg-active: #30363d;
+  
+  --fg-primary: #c9d1d9;
+  --fg-secondary: #8b949e;
+  --fg-muted: #484f58;
+  
+  --color-blue: #58a6ff;
+  --color-green: #7ee787;
+  --color-red: #ff7b72;
+  --color-orange: #ffe699;
+  --color-purple: #d2a8ff;
+  --color-cyan: #a5d6ff;
+  
+  --border-color: #30363d;
+  --border-hover: #8b949e;
+  
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Courier New', monospace;
+  --font-sans: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  --container-max-width: 900px;
+  --gutter-width: 50px;
+  --line-height-base: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--bg-primary);
+  color: var(--fg-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: var(--line-height-base);
+  min-height: 100vh;
+}
+
+/* Base Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-muted);
+}
+
+a {
+  color: var(--color-blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: var(--color-cyan);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* --- Layout Structure --- */
+
+/* Site Header */
+.site-header {
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  padding: 1rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.site-logo a {
+  color: var(--fg-primary);
+  text-decoration: none;
+}
+.site-logo .owner {
+  color: var(--color-purple);
+}
+.site-logo .separator {
+  color: var(--fg-muted);
+}
+.site-logo .repo {
+  color: var(--color-blue);
+}
+
+.git-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  background-color: var(--bg-subtle);
+  color: var(--fg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.25rem 0.6rem;
+  border-radius: 2em;
+}
+.git-badge svg {
+  fill: currentColor;
+  width: 12px;
+  height: 12px;
+}
+
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  padding-top: 0.5rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.25rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--fg-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--fg-primary);
+  text-decoration: none;
+}
+.nav-links a.active {
+  border-bottom: 2px solid var(--color-orange);
+  padding-bottom: 2px;
+}
+
+.nav-socials {
+  display: flex;
+  gap: 0.75rem;
+}
+.nav-socials a {
+  color: var(--fg-secondary);
+}
+.nav-socials a:hover {
+  color: var(--fg-primary);
+}
+
+/* Main Workspace with Line Numbers */
+.workspace-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+  min-height: calc(100vh - 120px);
+}
+
+/* The Line Gutter */
+.line-gutter {
+  width: var(--gutter-width);
+  border-right: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  padding: 2rem 0.5rem 2rem 0;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+}
+.line-number {
+  height: 1.6rem;
+  line-height: 1.6rem;
+  padding-right: 0.5rem;
+  display: block;
+  transition: color 0.15s ease;
+}
+.line-number:hover {
+  color: var(--fg-secondary);
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  padding: 2rem 2rem 4rem 2rem;
+  min-width: 0; /* fixes markdown overflow issues */
+}
+
+/* Footer styling */
+.site-footer {
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  padding: 1.5rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--fg-secondary);
+}
+.footer-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+/* --- Code-Like Blog Styling Elements --- */
+
+.file-info-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--fg-secondary);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+}
+.file-info-bar svg {
+  fill: currentColor;
+  width: 14px;
+  height: 14px;
+}
+.file-info-bar .file-path {
+  color: var(--fg-primary);
+}
+
+/* Hero & Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--fg-primary);
+  margin-top: 1.75em;
+  margin-bottom: 0.75em;
+  line-height: 1.25;
+}
+h1:first-child {
+  margin-top: 0;
+}
+h1 {
+  font-size: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.3em;
+}
+h2 {
+  font-size: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.3em;
+}
+h3 {
+  font-size: 1.25rem;
+}
+
+/* Add custom "// type" comments or "// comment" details to titles */
+.title-comment {
+  font-weight: normal;
+  color: var(--fg-secondary);
+  font-size: 0.9rem;
+}
+
+p, ul, ol, blockquote, table, pre {
+  margin-bottom: 1rem;
+}
+
+p {
+  color: var(--fg-primary);
+  text-align: justify;
+}
+
+/* List elements */
+ul, ol {
+  padding-left: 1.5rem;
+}
+li {
+  margin-bottom: 0.25rem;
+}
+ul {
+  list-style: none;
+}
+ul li::before {
+  content: "-";
+  color: var(--color-blue);
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  color: var(--fg-secondary);
+  background-color: var(--bg-secondary);
+  border-radius: 0 4px 4px 0;
+}
+
+/* Inline code & Code blocks */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  background-color: var(--bg-secondary);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  color: var(--color-orange);
+  border: 1px solid var(--border-color);
+}
+pre code {
+  color: inherit;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+}
+pre {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* Custom post cards (Home/Index) */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.post-card {
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.post-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.post-card-header {
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--fg-secondary);
+}
+
+.post-card-header .post-date {
+  color: var(--color-purple);
+}
+
+.post-card-body {
+  padding: 1.25rem 1.5rem;
+}
+
+.post-card-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.35rem;
+  border: none;
+  padding-bottom: 0;
+}
+.post-card-title a {
+  color: var(--color-blue);
+}
+.post-card-title a:hover {
+  color: var(--color-cyan);
+}
+
+.post-card-excerpt {
+  color: var(--fg-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.post-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+}
+
+.post-tags {
+  display: flex;
+  gap: 0.5rem;
+}
+.post-tag {
+  color: var(--color-green);
+}
+.post-tag::before {
+  content: "#";
+}
+
+.post-read-more {
+  color: var(--color-orange);
+}
+.post-read-more::after {
+  content: "()";
+}
+
+/* Post view metadata */
+.post-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--fg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+.post-metadata span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.post-metadata svg {
+  fill: currentColor;
+  width: 14px;
+  height: 14px;
+}
+
+/* Git Diff markers for styling quotes or highlights */
+.diff-added {
+  border-left: 4px solid var(--color-green) !important;
+  background-color: rgba(126, 231, 135, 0.05) !important;
+}
+.diff-removed {
+  border-left: 4px solid var(--color-red) !important;
+  background-color: rgba(255, 123, 114, 0.05) !important;
+}
+
+/* Archive List Item */
+.archive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+.archive-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.archive-item:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+.archive-date {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--color-purple);
+  width: 100px;
+  flex-shrink: 0;
+}
+.archive-title {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  :root {
+    --gutter-width: 0px;
+  }
+  .line-gutter {
+    display: none;
+  }
+  .main-content {
+    padding: 1.5rem 1rem 3rem 1rem;
+  }
+  .header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

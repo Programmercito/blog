@@ -2,70 +2,73 @@
 layout: default
 ---
 
-<div id="editor-split-pane" class="editor-split-pane">
-  
-  <!-- Left Side: Source Code Editor -->
-  <div class="editor-pane pane-code">
-    <div class="code-editor-wrapper">
-      <!-- Line numbers populated by vscode.js -->
-      <div class="code-line-numbers"></div>
-      
-      <!-- Code body -->
-      <div class="code-content">
-<pre><code class="language-markdown">---
-title: "{{ page.title }}"
-date: {{ page.date | date: "%Y-%m-%d" }}
-layout: post
-{% if page.author %}author: "{{ page.author }}"{% endif %}
----
-
-{{ page.content | escape }}</code></pre>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right Side: Markdown Live Preview -->
-  <div class="editor-pane pane-preview">
-    <article>
-      <h1>{{ page.title }}</h1>
-      <div class="post-metadata">
-        <span>
-          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
-          {{ page.date | date: "%B %d, %Y" }}
-        </span>
-        {% if page.author %}
-        <span>
-          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-          {{ page.author }}
-        </span>
-        {% endif %}
-      </div>
-
-      {{ content }}
-
-      {% if site.comments.isso_domain or site.comments.disqus_shortname %}
-        <hr style="border: 0; border-top: 1px solid var(--border-light); margin: 30px 0;">
-        {% if site.comments.isso_domain %}<div id="isso-thread"></div>{% endif %}
-        {% if site.comments.disqus_shortname %}<div id="disqus_thread"></div>{% endif %}
-        <noscript>Please enable JavaScript to view comments.</noscript>
-      {% endif %}
-    </article>
-
-    {% unless site.show_minimal or site.footer %}
-      {% if page.next.url or page.previous.url %}
-        <footer class="nowrap" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between;">
-          {% if page.next.url %}
-            <a href="{{ page.next.url | relative_url }}">« {{ page.next.title }}</a>
-          {% else %}
-            <div></div>
-          {% endif %}
-          {% if page.previous.url %}
-            <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }} »</a>
-          {% endif %}
-        </footer>
-      {% endif %}
-    {% endunless %}
-  </div>
-  
+{% assign post_slug = page.title | slugify %}
+<div class="file-info-bar">
+  <svg viewBox="0 0 16 16" version="1.1" aria-hidden="true">
+    <path fill-rule="evenodd" d="M3 1.75C3 .784 3.784 0 4.75 0h6.5A1.75 1.75 0 0113 1.75v12.5A1.75 1.75 0 0111.25 16H4.75A1.75 1.75 0 013 14.25V1.75zM4.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h6.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25h-6.5z"></path>
+    <path fill-rule="evenodd" d="M11 5H5V3.5h6V5zm0 3H5V6.5h6V8zm0 3H5V9.5h6V11z"></path>
+  </svg>
+  <span class="file-path">_posts/{{ page.date | date: "%Y-%m-%d" }}-{{ post_slug }}.md</span>
 </div>
 
+<article>
+  <h1>{{ page.title }} <span class="title-comment">// published_post</span></h1>
+  
+  <div class="post-metadata">
+    <span>
+      <!-- calendar icon -->
+      <svg viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M4.75 0a.75.75 0 01.75.75V2h4.5V.75a.75.75 0 011.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0112.75 16H3.25A1.75 1.75 0 011.5 14.25V3.75C1.5 2.784 2.284 2 3.25 2H4.5V.75A.75.75 0 014.75 0zM2.5 7.5v6.75c0 .138.112.25.25.25h9.5c.138 0 .25-.112.25-.25V7.5H2.5zm10.25-1.5H2.5V3.75c0-.138.112-.25.25-.25h9.5c.138 0 .25.112.25.25V6z"></path></svg>
+      {{ page.date | date: "%B %d, %Y" }}
+    </span>
+    
+    {% if page.author %}
+    <span>
+      <!-- user icon -->
+      <svg viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M10.5 5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm1.5 0a4 4 0 11-8 0 4 4 0 018 0zm-9 8c0-1.66 1.34-3 3-3h6c1.66 0 3 1.34 3 3 0 .28-.22.5-.5.5h-11a.5.5 0 01-.5-.5z"></path></svg>
+      {{ page.author }}
+    </span>
+    {% endif %}
+    
+    {% if page.tags.size > 0 %}
+    <span>
+      <!-- tag icon -->
+      <svg viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a2.75 2.75 0 010 3.89l-5.025 5.025a2.75 2.75 0 01-3.89 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+      {% for tag in page.tags %}
+        <a href="{{ '/archive.html' | relative_url }}?tag={{ tag }}" style="color: var(--color-green); margin-right: 4px;">{{ tag }}</a>
+      {% endfor %}
+    </span>
+    {% endif %}
+  </div>
+
+  <div style="margin-top: 1.5rem; margin-bottom: 3rem;">
+    {{ content }}
+  </div>
+
+  {% if site.comments.isso_domain or site.comments.disqus_shortname %}
+    <div style="border-top: 1px solid var(--border-color); margin: 3rem 0; padding-top: 2rem;">
+      {% if site.comments.isso_domain %}<div id="isso-thread"></div>{% endif %}
+      {% if site.comments.disqus_shortname %}<div id="disqus_thread"></div>{% endif %}
+      <noscript>Please enable JavaScript to view comments.</noscript>
+    </div>
+  {% endif %}
+
+  {% unless site.show_minimal or site.footer %}
+    {% if page.next.url or page.previous.url %}
+      <nav style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.9rem;">
+        {% if page.next.url %}
+          <a href="{{ page.next.url | relative_url }}" style="color: var(--color-blue);">
+            &laquo; {{ page.next.title | truncate: 30 }}
+          </a>
+        {% else %}
+          <div></div>
+        {% endif %}
+        
+        {% if page.previous.url %}
+          <a href="{{ page.previous.url | relative_url }}" style="color: var(--color-blue);">
+            {{ page.previous.title | truncate: 30 }} &raquo;
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% endunless %}
+</article>

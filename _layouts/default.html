@@ -4,84 +4,83 @@
 {% include head.html %}
 
 <body>
-  <!-- Container wrapping the app workspace -->
-  <div class="app-container">
-    
-    <!-- 1. Activity Bar (Far Left) -->
-    {% include activity_bar.html %}
-    
-    <!-- 2. Explorer Sidebar (Left) -->
-    {% include explorer.html %}
-    
-    <!-- 3. Editor Container (Main Area) -->
-    <main class="editor-container">
-      
-      <!-- Tab Bar -->
-      <div class="tab-bar">
-        <!-- Default tabs: README.md and Archive -->
-        <a href="{{ '/' | relative_url }}" class="tab {% if page.url == '/' or page.url == '/index.html' %}active{% endif %}">
-          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor; color: var(--dracula-cyan);"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-          README.md
-        </a>
-        <a href="{{ '/archive.html' | relative_url }}" class="tab {% if page.url == '/archive.html' %}active{% endif %}">
-          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor; color: var(--dracula-orange);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-          archive.html
-        </a>
-        
-        <!-- If current page is a post, show its tab -->
-        {% if page.layout == "post" %}
-          <a href="{{ page.url | relative_url }}" class="tab active">
-            <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor; color: var(--dracula-cyan);"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-            {% assign post_slug = page.title | slugify %}
-            {{ page.date | date: "%Y-%m-%d" }}-{{ post_slug }}.md
+
+  <!-- 1. Header (Repository Mockup) -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="header-top">
+        <div class="site-logo">
+          <a href="{{ '/' | relative_url }}">
+            <span class="owner">programmercito</span><span class="separator">/</span><span class="repo">blog</span>
           </a>
-        {% endif %}
-      </div>
-      
-      <!-- Breadcrumbs -->
-      <div class="breadcrumbs">
-        <span>programmercito-blog</span>
-        <span class="breadcrumb-separator">></span>
-        {% if page.layout == "post" %}
-          <span>_posts</span>
-          <span class="breadcrumb-separator">></span>
-          <span>{{ page.date | date: "%Y-%m-%d" }}-{{ page.title | slugify }}.md</span>
-        {% elsif page.file %}
-          <span>{{ page.file }}</span>
-        {% else %}
-          <span>{{ page.title | downcase | replace: " ", "-" }}.md</span>
-        {% endif %}
-        
-        <!-- View mode controls (Only display on post pages or index page) -->
-        {% if page.layout == "post" or page.url == "/" or page.url == "/index.html" %}
-        <div class="view-mode-controls">
-          <button id="btn-view-code" class="control-btn" title="Show Source Code">
-            <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-            Code
-          </button>
-          <button id="btn-view-split" class="control-btn" title="Show Side-by-Side Split">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 16h-4V5h4v14z"/></svg>
-            Split
-          </button>
-          <button id="btn-view-preview" class="control-btn" title="Show Rendered Preview">
-            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-            Preview
-          </button>
         </div>
-        {% endif %}
+        <div class="git-badge">
+          <!-- git branch SVG icon -->
+          <svg viewBox="0 0 16 16" version="1.1" aria-hidden="true">
+            <path fill-rule="evenodd" d="M11.75 2.5a.75.75 0 100-1.5.75.75 0 000 1.5zm-2.25.75a2.25 2.25 0 113 2.122V6A2.5 2.5 0 0110 8.5H6a.5.5 0 00-.5.5v1.128a2.251 2.251 0 11-1.5 0V5.372a2.25 2.25 0 111.5 0v1.628A1 1 0 016.5 8h4a1 1 0 001-1v-.628A2.25 2.25 0 019.5 3.25zM4.25 12a.75.75 0 100-1.5.75.75 0 000 1.5zM3.5 3.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0z"></path>
+          </svg>
+          <span>main</span>
+        </div>
       </div>
       
-      <!-- Core content output -->
+      <div class="site-nav">
+        <ul class="nav-links">
+          <li>
+            <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' or page.url == '/index.html' %}active{% endif %}">
+              README.md
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/archive.html' | relative_url }}" class="{% if page.url == '/archive.html' %}active{% endif %}">
+              archive.html
+            </a>
+          </li>
+        </ul>
+        
+        <div class="nav-socials">
+          {%- for item in site.external -%}
+            <a href="{{ item.url }}" title="{{ item.title }}" target="_blank" rel="noopener noreferrer">
+              {%- if item.icon -%}
+                <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor; display: block;">
+                  {%- if item.icon == 'github' -%}
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                  {%- elsif item.icon == 'envelope' -%}
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  {%- elsif item.icon == 'rss' -%}
+                    <path d="M6.18 15.64a2.18 2.18 0 11-4.36 0 2.18 2.18 0 014.36 0zM2 9.34A6.66 6.66 0 018.66 16H6.13c0-2.28-1.85-4.13-4.13-4.13V9.34zM2 3a13 13 0 0113 13h-2.5A10.5 10.5 0 002 5.5V3z"/>
+                  {%- endif -%}
+                </svg>
+              {%- else -%}
+                {{ item.title }}
+              {%- endif -%}
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Workspace Layout with Left Gutter -->
+  <div class="workspace-container">
+    <!-- Left Gutter for Line Numbers -->
+    <div class="line-gutter">
+      <!-- Populated dynamically by sketchbook.js -->
+    </div>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
       {{ content }}
-      
     </main>
   </div>
-  
-  <!-- 4. Status Bar (Bottom) -->
-  {% include status_bar.html %}
+
+  <!-- 3. Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p>// Powered by Jekyll &amp; Ruby | Designed as Code Sketchbook</p>
+    </div>
+  </footer>
 
   <!-- Load Interactive Scripts -->
-  <script src="{{ "/assets/js/vscode.js" | relative_url }}"></script>
+  <script src="{{ "/assets/js/sketchbook.js" | relative_url }}"></script>
 </body>
 </html>
-

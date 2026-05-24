@@ -4,77 +4,60 @@ title: "README.md"
 permalink: /
 ---
 
-<div id="editor-split-pane" class="editor-split-pane">
-  
-  <!-- Left Side: README.md Source Code -->
-  <div class="editor-pane pane-code">
-    <div class="code-editor-wrapper">
-      <div class="code-line-numbers"></div>
-      <div class="code-content">
-<pre><code class="language-markdown"># Welcome to Programmercito Blog
-
-This is my developer workspace where I share articles on coding, design, and software engineering.
-
-## Recent Articles
-
-{% for post in site.posts limit: 5 %}
-- [{{ post.title }}]({{ post.url | relative_url }}) - {{ post.date | date: "%B %d, %Y" }}
-{% endfor %}
-
-## Configuration
-
-- Editor: Visual Studio Code (Web Edition)
-- Color Theme: Dracula Theme
-- Font: JetBrains Mono
-- Power: Jekyll & Ruby
-</code></pre>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right Side: Live Render Preview -->
-  <div class="editor-pane pane-preview">
-    <div class="home-workspace">
-      
-      <div class="home-title-wrapper">
-        <h1 style="border: none; padding: 0; font-size: 2.5rem; color: var(--dracula-purple);">Visual Studio Code</h1>
-        <p class="home-subtitle">Programmercito Blog Workspace v1.0.0</p>
-      </div>
-
-      <div class="workspace-welcome">
-        <h2 class="welcome-title" style="margin-top: 0; border: none; padding-bottom: 0;">Start</h2>
-        
-        <div class="welcome-shortcuts">
-          {% if site.posts.size > 0 %}
-          <a href="{{ site.posts.first.url | relative_url }}" class="shortcut-item">
-            <span>📄 Open Latest Post ({{ site.posts.first.title }})</span>
-            <span class="shortcut-keys">Ctrl + O</span>
-          </a>
-          {% endif %}
-          <a href="{{ '/archive.html' | relative_url }}" class="shortcut-item">
-            <span>🗂 Browse All Files (Archive)</span>
-            <span class="shortcut-keys">Ctrl + Shift + F</span>
-          </a>
-        </div>
-      </div>
-
-      <div style="margin-top: 30px;">
-        <h2 style="font-size: 1.4rem; color: var(--dracula-cyan); border-bottom: 1px solid var(--border-light); padding-bottom: 8px;">Recent Files</h2>
-        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
-          {% for post in site.posts limit: 5 %}
-            <a href="{{ post.url | relative_url }}" style="display: flex; justify-content: space-between; padding: 8px 12px; border-radius: 4px; background: rgba(255,255,255,0.02); text-decoration: none; border: 1px solid transparent;" onmouseover="this.style.borderColor='var(--dracula-purple)'" onmouseout="this.style.borderColor='transparent'">
-              <span style="color: var(--fg-primary); font-family: var(--font-mono); font-size: 13px;">
-                <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor; color: var(--dracula-cyan); vertical-align: middle; margin-right: 6px;"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                _posts/{{ post.date | date: "%Y-%m-%d" }}-{{ post.slug }}.md
-              </span>
-              <span style="color: var(--fg-secondary); font-size: 12px;">{{ post.date | date: "%b %d, %Y" }}</span>
-            </a>
-          {% endfor %}
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  
+<div class="file-info-bar">
+  <svg viewBox="0 0 16 16" version="1.1" aria-hidden="true">
+    <path fill-rule="evenodd" d="M3 1.75C3 .784 3.784 0 4.75 0h6.5A1.75 1.75 0 0113 1.75v12.5A1.75 1.75 0 0111.25 16H4.75A1.75 1.75 0 013 14.25V1.75zM4.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h6.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25h-6.5z"></path>
+    <path fill-rule="evenodd" d="M11 5H5V3.5h6V5zm0 3H5V6.5h6V8zm0 3H5V9.5h6V11z"></path>
+  </svg>
+  <span class="file-path">README.md</span>
 </div>
 
+<article class="readme-content">
+  <h1 style="border: none; margin-top: 0; padding-bottom: 0;">Welcome to Programmercito Blog <span class="title-comment">// public workspace</span></h1>
+  
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: var(--fg-primary);">
+    This is my developer workspace where I share articles on coding, design, and software engineering. Here you will find insights, guides, and tutorials detailing my experiences and discoveries.
+  </p>
+
+  <h2 style="margin-top: 3rem;">Recent Articles <span class="title-comment">// git commits</span></h2>
+  
+  <div class="post-list" style="margin-top: 1.5rem;">
+    {% for post in site.posts limit: 5 %}
+      <div class="post-card">
+        <div class="post-card-header">
+          <span>
+            <svg viewBox="0 0 16 16" version="1.1" style="width: 12px; height: 12px; fill: currentColor; vertical-align: middle; margin-right: 4px;">
+              <path fill-rule="evenodd" d="M3 1.75C3 .784 3.784 0 4.75 0h6.5A1.75 1.75 0 0113 1.75v12.5A1.75 1.75 0 0111.25 16H4.75A1.75 1.75 0 013 14.25V1.75zM4.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h6.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25h-6.5z"></path>
+            </svg>
+            _posts/{{ post.date | date: "%Y-%m-%d" }}-{{ post.slug }}.md
+          </span>
+          <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+        </div>
+        <div class="post-card-body">
+          <h3 class="post-card-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h3>
+          {% if post.excerpt %}
+            <div class="post-card-excerpt">
+              {{ post.excerpt | strip_html | truncatewords: 25 }}
+            </div>
+          {% endif %}
+          <div class="post-card-footer">
+            <div class="post-tags">
+              {% for tag in post.tags %}
+                <span class="post-tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            <a href="{{ post.url | relative_url }}" class="post-read-more">read_more</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div style="margin-top: 3rem; text-align: center;">
+    <a href="{{ '/archive.html' | relative_url }}" style="font-family: var(--font-mono); font-size: 0.95rem; border: 1px solid var(--border-color); padding: 0.6rem 1.2rem; border-radius: 6px; background: var(--bg-secondary); display: inline-block;">
+      view_all_files() -> archive.html
+    </a>
+  </div>
+</article>

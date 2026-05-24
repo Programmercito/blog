@@ -119,6 +119,7 @@ html, body {
   min-height: 100vh;
   position: relative;
   transition: var(--theme-transition);
+  overflow-wrap: break-word;
 }
 
 body::before {
@@ -397,6 +398,8 @@ a:hover {
   flex: 1;
   padding: 2rem 2rem 4rem 2rem;
   min-width: 0; /* fixes markdown overflow issues */
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Footer styling */

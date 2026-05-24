@@ -27,8 +27,8 @@ En lugar de elegir cada color de manera independiente, el algoritmo parte de un 
         │
         ▼
 ┌─────────────────────┐
-│ Estrategia de         │  → define secondaryHue y accentHue
-│ armonía (al azar)     │
+│ Estrategia de       │  → define secondaryHue y accentHue
+│ armonía (al azar)   │
 └─────────────────────┘
         │
         ▼

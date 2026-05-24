@@ -3,7 +3,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   const mainContent = document.querySelector('.main-content');
   const lineGutter = document.querySelector('.line-gutter');
+  const workspace = document.querySelector('.workspace-container');
 
+  // 1. Line Numbers Generator
   function updateLineNumbers() {
     if (!mainContent || !lineGutter) return;
     
@@ -33,15 +35,61 @@ document.addEventListener('DOMContentLoaded', () => {
     lineGutter.appendChild(fragment);
   }
 
-  // Run on load
+  // Run line generator on events
   updateLineNumbers();
-
-  // Run on window resize
   window.addEventListener('resize', updateLineNumbers);
-  
-  // Run when fonts or images finish loading
   window.addEventListener('load', updateLineNumbers);
-  
-  // Re-run after a brief delay to ensure dynamic elements have fully rendered
   setTimeout(updateLineNumbers, 250);
+
+  // 2. Spotlight Background Cursor-Following Glow
+  document.addEventListener('mousemove', (e) => {
+    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+    document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+  });
+
+  // 3. Dark/Light Theme Switcher Toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      // Update line gutter height if layout shifts slightly
+      setTimeout(updateLineNumbers, 50);
+    });
+  }
+
+  // 4. IDE Line Highlight Interaction
+  if (workspace && lineGutter) {
+    workspace.addEventListener('mousemove', (e) => {
+      const rect = workspace.getBoundingClientRect();
+      const relativeY = e.clientY - rect.top;
+      
+      // Calculate active line index based on line height (1.6rem = 25.6px)
+      const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+      const lineHeightPx = rootFontSize * 1.6;
+      
+      // Padding of workspace/main-content is 2rem = 32px
+      const paddingOffset = rootFontSize * 2;
+      
+      const lineIndex = Math.floor((relativeY - paddingOffset) / lineHeightPx);
+      const spans = lineGutter.querySelectorAll('.line-number');
+      
+      spans.forEach((span, idx) => {
+        if (idx === lineIndex) {
+          span.classList.add('active');
+        } else {
+          span.classList.remove('active');
+        }
+      });
+    });
+    
+    // Remove highlight when mouse leaves workspace
+    workspace.addEventListener('mouseleave', () => {
+      const spans = lineGutter.querySelectorAll('.line-number');
+      spans.forEach(span => span.classList.remove('active'));
+    });
+  }
 });

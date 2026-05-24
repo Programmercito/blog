@@ -23,7 +23,8 @@ Armonic Themes resuelve esto con un principio fundamentalmente distinto.
 
 En lugar de elegir cada color de manera independiente, el algoritmo parte de un único Hue base (un ángulo en la rueda de color, entre 0° y 360°) y deriva todos los demás colores a partir de él usando relaciones matemáticas establecidas.
 
-`Hue base aleatorio (0–360°)
+```
+Hue base aleatorio (0–360°)
         │
         ▼
 ┌─────────────────────┐
@@ -32,7 +33,8 @@ En lugar de elegir cada color de manera independiente, el algoritmo parte de un 
 └─────────────────────┘
         │
         ▼
-Todos los colores de la paleta`
+Todos los colores de la paleta
+```
 
 Esto garantiza que, sin importar qué número salga, los colores siempre tendrán una relación armónica entre sí.
 

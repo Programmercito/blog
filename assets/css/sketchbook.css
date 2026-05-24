@@ -402,6 +402,11 @@ a:hover {
   word-break: break-word;
 }
 
+.main-content img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Footer styling */
 .site-footer {
   border-top: 1px solid var(--border-color);

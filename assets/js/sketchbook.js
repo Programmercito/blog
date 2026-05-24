@@ -94,4 +94,27 @@ document.addEventListener('DOMContentLoaded', () => {
       spans.forEach(span => span.classList.remove('active'));
     });
   }
+
+  // 5. Scroll Reveal for article content
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('article > *').forEach((el, i) => {
+      el.classList.add('scroll-reveal');
+      el.style.transitionDelay = `${Math.min(i * 0.05, 0.3)}s`;
+      revealObserver.observe(el);
+    });
+  }
+
+  // 6. Archive items stagger
+  document.querySelectorAll('.archive-item').forEach((item, i) => {
+    item.style.animation = `fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.03}s both`;
+  });
 });

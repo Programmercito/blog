@@ -62,11 +62,13 @@ JWT es un estándar abierto que define una forma compacta y autónoma de transmi
 **Implementación**:
 
 **1. Generación del JWT con Java**:
+
 ![cbc6955b3cfa68cdd5d47ca56323211d.png](../assets/images/cbc6955b3cfa68cdd5d47ca56323211d.png)
 
 **2. Validación y visualización con Angular**:
 
 Para el frontend, usaremos Angular con TypeScript. Hay varias bibliotecas disponibles para manejar JWT en TypeScript, como jsrsasign.
+
 ![b5aebbf32331649fc7a2a3c8818e1849.png](../assets/images/b5aebbf32331649fc7a2a3c8818e1849.png)
 
 **3. Funcionamiento**.
@@ -136,7 +138,9 @@ aca el codigo de llamado al JWT:
 ![763d2db4d9f154a30738e9090dcc4fbe.png](../assets/images/763d2db4d9f154a30738e9090dcc4fbe.png)
 
 Una vez accediendo al link podemos ver como hemos accedido a los datos del jwt de manera segura:
+
 ![061c9daed7c8135bcc28ac5f2f09ec8c.png](../assets/images/061c9daed7c8135bcc28ac5f2f09ec8c.png)
+
 Repo de la aplicación de ejmplo de uso de JWT:
 
 [Programmercito/jwtlink-web-example (github.com)](https://github.com/Programmercito/jwtlink-web-example)

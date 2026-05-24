@@ -1,6 +1,6 @@
 title: "devcito blog"
-author: "Blog Author"
-description: "My blog"
+author: "devcito"
+description: "El blog de devcito"
 permalink: /:title/
 lang: "en"
 excerpt_separator: "\n\n\n"

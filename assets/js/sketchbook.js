@@ -95,8 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Scroll Reveal for article content
+  // 5. Scroll Reveal + staggered entrance for article content
   if ('IntersectionObserver' in window) {
+    let aboveFoldIdx = 0;
+
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -108,8 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('article > *').forEach((el) => {
       const rect = el.getBoundingClientRect();
-      if (rect.top >= window.innerHeight) {
-        // Only animate elements below the visible area
+      if (rect.top < window.innerHeight) {
+        // Already visible: staggered CSS animation (no observer needed, no flash)
+        const delay = Math.min(aboveFoldIdx * 0.045, 0.35);
+        el.style.animation = `fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s both`;
+        aboveFoldIdx++;
+      } else {
+        // Below fold: reveal on scroll
         el.classList.add('scroll-reveal');
         revealObserver.observe(el);
       }

@@ -106,10 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
-    document.querySelectorAll('article > *').forEach((el, i) => {
-      el.classList.add('scroll-reveal');
-      el.style.transitionDelay = `${Math.min(i * 0.05, 0.3)}s`;
-      revealObserver.observe(el);
+    document.querySelectorAll('article > *').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top >= window.innerHeight) {
+        // Only animate elements below the visible area
+        el.classList.add('scroll-reveal');
+        revealObserver.observe(el);
+      }
     });
   }
 

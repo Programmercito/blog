@@ -42,6 +42,20 @@ html, body {
   font-size: 16px;
   line-height: var(--line-height-base);
   min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: radial-gradient(rgba(48, 54, 61, 0.2) 1px, transparent 1px);
+  background-size: 24px 24px;
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Base Scrollbars */
@@ -76,7 +90,8 @@ a:hover {
 /* Site Header */
 .site-header {
   border-bottom: 1px solid var(--border-color);
-  background-color: var(--bg-secondary);
+  background-color: rgba(22, 27, 34, 0.8);
+  backdrop-filter: blur(12px);
   padding: 1rem 1.5rem;
   position: sticky;
   top: 0;
@@ -122,7 +137,7 @@ a:hover {
 .git-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.45rem;
   font-family: var(--font-mono);
   font-size: 0.8rem;
   background-color: var(--bg-subtle);
@@ -130,6 +145,17 @@ a:hover {
   border: 1px solid var(--border-color);
   padding: 0.25rem 0.6rem;
   border-radius: 2em;
+}
+
+/* Green dot for git status */
+.git-badge::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-green);
+  box-shadow: 0 0 6px var(--color-green);
 }
 .git-badge svg {
   fill: currentColor;
@@ -150,16 +176,16 @@ a:hover {
   gap: 1.25rem;
   list-style: none;
 }
-.nav-links a {
+.nav-links a, .nav-links .nav-file-tab {
   color: var(--fg-secondary);
   font-family: var(--font-mono);
   font-size: 0.9rem;
 }
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover, .nav-links a.active, .nav-links .nav-file-tab.active {
   color: var(--fg-primary);
   text-decoration: none;
 }
-.nav-links a.active {
+.nav-links a.active, .nav-links .nav-file-tab.active {
   border-bottom: 2px solid var(--color-orange);
   padding-bottom: 2px;
 }
@@ -358,19 +384,21 @@ pre {
 
 .post-card {
   border: 1px solid var(--border-color);
-  background-color: var(--bg-secondary);
+  background-color: rgba(22, 27, 34, 0.75);
+  backdrop-filter: blur(8px);
   border-radius: 6px;
   overflow: hidden;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 .post-card:hover {
-  border-color: var(--border-hover);
+  border-color: var(--color-blue);
+  box-shadow: 0 4px 20px rgba(88, 166, 255, 0.08);
   transform: translateY(-2px);
 }
 
 .post-card-header {
   border-bottom: 1px solid var(--border-color);
-  background-color: var(--bg-primary);
+  background-color: rgba(13, 17, 34, 0.85);
   padding: 0.5rem 1rem;
   display: flex;
   justify-content: space-between;
@@ -378,6 +406,23 @@ pre {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--fg-secondary);
+}
+
+.post-card-header span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Green status indicator dot */
+.post-card-header span:first-child::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-green);
+  box-shadow: 0 0 6px var(--color-green);
 }
 
 .post-card-header .post-date {
@@ -404,7 +449,7 @@ pre {
 .post-card-excerpt {
   color: var(--fg-secondary);
   font-size: 0.95rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   line-height: 1.5;
 }
 
@@ -421,7 +466,12 @@ pre {
   gap: 0.5rem;
 }
 .post-tag {
+  font-size: 0.75rem;
   color: var(--color-green);
+  background-color: rgba(126, 231, 135, 0.05);
+  border: 1px solid rgba(126, 231, 135, 0.15);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
 }
 .post-tag::before {
   content: "#";
@@ -429,9 +479,14 @@ pre {
 
 .post-read-more {
   color: var(--color-orange);
+  transition: color 0.15s ease;
 }
 .post-read-more::after {
   content: "()";
+}
+.post-read-more:hover {
+  color: var(--color-cyan);
+  text-decoration: none;
 }
 
 /* Post view metadata */

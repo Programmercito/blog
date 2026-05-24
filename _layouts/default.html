@@ -31,9 +31,9 @@
             </a>
           </li>
           <li>
-            <a href="{{ '/archive.html' | relative_url }}" class="{% if page.url == '/archive.html' %}active{% endif %}">
+            <span class="nav-file-tab {% if page.url == '/archive.html' or page.url == '/archive/' %}active{% endif %}">
               archive.html
-            </a>
+            </span>
           </li>
         </ul>
         
@@ -73,10 +73,9 @@
     </main>
   </div>
 
-  <!-- 3. Footer -->
   <footer class="site-footer">
     <div class="footer-container">
-      <p>// Powered by Jekyll &amp; Ruby | Designed as Code Sketchbook</p>
+      <p>// Powered by Jekyll &amp; Ruby | Designed as Code Sketchbook | <a href="https://devcito.org" target="_blank" rel="noopener noreferrer" style="color: var(--color-orange);">Hecho con ❤️ por devcito</a></p>
     </div>
   </footer>
 

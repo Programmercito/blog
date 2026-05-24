@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Rounded square background -->
+  <rect width="100" height="100" rx="20" fill="#0d1117"/>
+  
+  <!-- Terminal Prompt symbol '>' -->
+  <path d="M 28 25 L 53 50 L 28 75" fill="none" stroke="#58a6ff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Blinking Cursor square -->
+  <rect x="60" y="58" width="18" height="18" rx="2" fill="#7ee787">
+    <!-- Blinking animation -->
+    <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
+  </rect>
+</svg>

@@ -22,7 +22,7 @@ navigation:                     # accepts {file, title, url, icon, sidebaricon}
   - {file: "README.md", sidebaricon: address-card}
 
 external:                       # accepts {file, title, url, icon, sidebaricon}
-  - {title: Mail, icon: envelope, url: "mailto:author@example.com"}
+  - {title: Mail, icon: envelope, url: "mailto:devcitobo@outlook.com"}
   - {title: Github, icon: github, url: "https://github.com/programmercito"}
   - {title: Subscribe, icon: rss, url: "/feed.xml"}
 

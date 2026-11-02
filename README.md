@@ -2,6 +2,8 @@
 title: "About"
 permalink: "/about/"
 layout: page
+sitemap: false
+noindex: true
 ---
 
 ## Github Pages
@@ -71,6 +73,14 @@ plugins:
 ## Math
 
 Contrast comes preinstalled with a leightweight alternative to MathJax called [KaTeX](https://katex.org/). To display equations in a post simply set `mathjax: true` in the article's front matter. [Jektex](https://github.com/yagarea/jektex) can be used to pre-render math on the server side.
+
+## SEO del blog
+
+- `_config.yml` define la URL pública usada en las URL canónicas, el sitemap y el feed. Actualízala si cambia el dominio.
+- En cada artículo, añade un `excerpt` o `description` descriptivo; opcionalmente, usa `image` con la ruta de una imagen pública, `image_alt` para describirla y `lang` si no está en español. Usa `last_modified_at` solo cuando el artículo se actualice.
+- Para excluir una página del índice y del sitemap, añade `noindex: true` y `sitemap: false` a su front matter.
+- Tras publicar, comprueba `/robots.txt` y `/sitemap.xml` en el dominio público y envía el sitemap a Google Search Console.
+- Para validar la salida local: `bundle exec jekyll build` y después `node --test tests\seo.test.cjs`.
 
 ## License
 

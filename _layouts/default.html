@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang }}">
-
+<head>
 {% include head.html %}
+</head>
 
 <body>
+  {%- if site.show_sidebar %}{% include sidebar.html %}{% endif %}
 
   <!-- 1. Header (Repository Mockup) -->
   <header class="site-header">

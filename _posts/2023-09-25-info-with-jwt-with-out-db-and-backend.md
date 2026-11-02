@@ -3,6 +3,7 @@ layout: post
 title: "Usando JWT para Mostrar información sin Base de Datos, tampoco backend"
 date: 2022-09-25
 author: "devcito"
+description: "Cómo compartir y validar información con JWT de firma asimétrica, Java y Angular sin una base de datos ni un backend publicado."
 tags: [jwt,db,info,data, backend]
 excerpt: "En el mundo moderno del desarrollo web, a menudo buscamos soluciones que reduzcan la complejidad y los costos. Una idea innovadora es usar JSON Web Tokens (JWT) para ..."
 ---

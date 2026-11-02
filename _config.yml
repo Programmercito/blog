@@ -1,6 +1,9 @@
 title: "devcito blog"
 author: "devcito"
-description: "El blog de devcito"
+author_url: "https://github.com/programmercito"
+description: "Artículos sobre desarrollo de software, arquitectura, algoritmos y proyectos personales de devcito."
+url: "https://blog.devcito.org"
+baseurl: ""
 permalink: /:title/
 lang: "es"
 excerpt_separator: "\n\n\n"

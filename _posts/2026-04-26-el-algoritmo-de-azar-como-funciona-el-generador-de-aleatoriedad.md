@@ -3,11 +3,13 @@ layout: post
 title: "El algoritmo de Azar: cómo funciona el generador de aleatoriedad"
 date: 2026-04-26
 author: "devcito"
+image: /assets/images/cfa64ef13f4a4719126bc8f5715ac9c5.png
+image_alt: "Página de inicio de Azar, herramientas de aleatoriedad basadas en el movimiento del cursor"
 tags: [azar, aleatoriedad, astro, tailwind, seguridad, javascript]
 excerpt: "Azar es una suite de herramientas de aleatoriedad estática que usa entropía humana, navegador y un pool interno para generar números más robustos que Math.random()."
 ---
 
-![cfa64ef13f4a4719126bc8f5715ac9c5.png](../assets/images/cfa64ef13f4a4719126bc8f5715ac9c5.png)
+![Página de inicio de Azar, herramientas de aleatoriedad basadas en el movimiento del cursor](../assets/images/cfa64ef13f4a4719126bc8f5715ac9c5.png)
 
 Azar es una suite de herramientas de aleatoriedad completamente estática, construida con Astro y Tailwind CSS. Su gran diferencia con otros generadores web es que no depende solo de Math.random(): aprovecha la entropía del usuario, la entropía del navegador y un pool interno que se alimenta de eventos reales.
 

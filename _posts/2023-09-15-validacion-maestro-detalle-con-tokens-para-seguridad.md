@@ -3,6 +3,7 @@ layout: post
 title: "Master-Detail Validation with Tokens for Store Security"
 date: 2023-09-15
 author: "devcito"
+lang: en
 tags: [security, validation, tokens, jwt, hmac, erp]
 excerpt: "How to secure master-detail validations in an ERP system using signed tokens to prevent unauthorized store data modifications."
 ---

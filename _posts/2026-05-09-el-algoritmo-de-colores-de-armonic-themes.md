@@ -3,13 +3,15 @@ layout: post
 title: "Cómo funciona el algoritmo de colores de Armonic Themes"
 date: 2026-05-09
 author: "devcito"
+image: /assets/images/7f80a2ffab01e342526ae1bad11a5559.png
+image_alt: "Vista de Armonic Themes y sus paletas de colores"
 tags: [colores, temas, armonía, diseño, algo]
 excerpt: "Una mirada técnica a cómo generar paletas que siempre se ven bien, en claro y en oscuro."
 ---
 
 Una mirada técnica a cómo generar paletas que siempre se ven bien, en claro y en oscuro.
 
-![7f80a2ffab01e342526ae1bad11a5559.png](../assets/images/7f80a2ffab01e342526ae1bad11a5559.png)
+![Vista de Armonic Themes y sus paletas de colores](../assets/images/7f80a2ffab01e342526ae1bad11a5559.png)
 
 ## El problema de las paletas "aleatorias"
 

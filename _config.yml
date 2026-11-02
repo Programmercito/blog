@@ -2,7 +2,7 @@ title: "devcito blog"
 author: "devcito"
 description: "El blog de devcito"
 permalink: /:title/
-lang: "en"
+lang: "es"
 excerpt_separator: "\n\n\n"
 date_format: "%B %d, %Y"
 

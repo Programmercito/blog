@@ -5,75 +5,41 @@ permalink: /
 ---
 
 <div class="file-info-bar">
-  <svg viewBox="0 0 16 16" version="1.1" aria-hidden="true">
-    <path fill-rule="evenodd" d="M3 1.75C3 .784 3.784 0 4.75 0h6.5A1.75 1.75 0 0113 1.75v12.5A1.75 1.75 0 0111.25 16H4.75A1.75 1.75 0 013 14.25V1.75zM4.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h6.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25h-6.5z"></path>
-    <path fill-rule="evenodd" d="M11 5H5V3.5h6V5zm0 3H5V6.5h6V8zm0 3H5V9.5h6V11z"></path>
-  </svg>
+  <span class="breadcrumb-muted">devcito-blog</span>
+  <span class="breadcrumb-separator">/</span>
   <span class="file-path">README.md</span>
+  <span class="file-info-status"><span></span> Markdown</span>
 </div>
 
 <article class="readme-content">
-  <h1 style="border: none; margin-top: 0; padding-bottom: 0;">Welcome to devcito_blog <span class="title-comment">// public workspace</span></h1>
-  
-  <pre class="ascii-logo" aria-label="devcito blog">
-██████╗ ███████╗██╗   ██╗ ██████╗██╗████████╗ ██████╗ 
-██╔══██╗██╔════╝██║   ██║██╔════╝██║╚══██╔══╝██╔═══██╗
-██║  ██║█████╗  ██║   ██║██║     ██║   ██║   ██║   ██║
-██║  ██║██╔══╝  ╚██╗ ██╔╝██║     ██║   ██║   ██║   ██║
-██████╔╝███████╗ ╚████╔╝ ╚██████╗██║   ██║   ╚██████╔╝
-╚═════╝ ╚══════╝  ╚═══╝   ╚═════╝╚═╝   ╚═╝    ╚═════╝ 
-                                                      
-      ██████╗ ██╗      ██████╗  ██████╗               
-      ██╔══██╗██║     ██╔═══██╗██╔════╝               
-      ██████╔╝██║     ██║   ██║██║  ███╗              
-      ██╔══██╗██║     ██║   ██║██║   ██║              
-      ██████╔╝███████╗╚██████╔╝╚██████╔╝              
-      ╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝               
-  </pre>
-  
-  <p style="margin-top: 1rem; font-size: 1.1rem; color: var(--fg-primary);">
-    Este es mi espacio de desarrollo donde comparto artículos y documentación para dar visibilidad a las cosas que hago en mis proyectos personales.
-  </p>
+  <div class="readme-heading">
+    <span class="readme-label">README.md <span>// archivo de inicio</span></span>
+    <h1><span class="markdown-marker">#</span> devcito<span class="heading-dot">.</span>blog</h1>
+    <p>Un espacio para compartir lo que construyo y aprendo desarrollando proyectos personales.</p>
+  </div>
 
-  <h2 style="margin-top: 3rem;">Recent Articles <span class="title-comment">// git commits</span></h2>
-  
-  <div class="post-list" style="margin-top: 1.5rem;">
+  <div class="editor-divider"><span>artículos recientes</span><span>{{ site.posts | size }} archivos</span></div>
+  <div class="post-list">
     {% for post in site.posts limit: 5 %}
       <div class="post-card">
         <div class="post-card-header">
-          <span>
-            <svg viewBox="0 0 16 16" version="1.1" style="width: 12px; height: 12px; fill: currentColor; vertical-align: middle; margin-right: 4px;">
-              <path fill-rule="evenodd" d="M3 1.75C3 .784 3.784 0 4.75 0h6.5A1.75 1.75 0 0113 1.75v12.5A1.75 1.75 0 0111.25 16H4.75A1.75 1.75 0 013 14.25V1.75zM4.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h6.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25h-6.5z"></path>
-            </svg>
-            post.md
-          </span>
-          <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+          <span>{{ post.slug }}.md</span>
+          <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d.%m.%Y" }}</time>
         </div>
         <div class="post-card-body">
-          <h3 class="post-card-title">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          </h3>
+          <h2 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
           {% if post.excerpt %}
-            <div class="post-card-excerpt">
-              {{ post.excerpt | strip_html | truncatewords: 25 }}
-            </div>
+            <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
           {% endif %}
           <div class="post-card-footer">
             <div class="post-tags">
-              {% for tag in post.tags %}
-                <span class="post-tag">{{ tag }}</span>
-              {% endfor %}
+              {% for tag in post.tags %}<span class="post-tag">{{ tag }}</span>{% endfor %}
             </div>
-            <a href="{{ post.url | relative_url }}" class="post-read-more">read_more</a>
+            <a href="{{ post.url | relative_url }}" class="post-read-more" aria-label="Leer {{ post.title | escape }}">abrir archivo <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
     {% endfor %}
   </div>
-
-  <div style="margin-top: 3rem; text-align: center;">
-    <a href="{{ '/archive/' | relative_url }}" style="font-family: var(--font-mono); font-size: 0.95rem; border: 1px solid var(--border-color); padding: 0.6rem 1.2rem; border-radius: 6px; background: var(--bg-secondary); display: inline-block;">
-      view_all_files() -> archive.html
-    </a>
-  </div>
+  <a class="archive-link" href="{{ '/archive/' | relative_url }}">Ver todos los artículos <span aria-hidden="true">→</span></a>
 </article>

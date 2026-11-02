@@ -66,15 +66,20 @@
             </a>
           </li>
           <li>
-            <span class="nav-file-tab {% if page.url == '/archive.html' or page.url == '/archive/' %}active{% endif %}">
+            <a href="{{ '/archive/' | relative_url }}" class="{% if page.url == '/archive.html' or page.url == '/archive/' %}active{% endif %}">
               archive.html
-            </span>
+            </a>
           </li>
+          {% if page.layout == 'post' %}
+          <li>
+            <a href="{{ page.url | relative_url }}" class="active post-tab" aria-current="page">{{ page.slug }}.md</a>
+          </li>
+          {% endif %}
         </ul>
         
         <div class="nav-socials">
           {%- for item in site.external -%}
-            <a href="{{ item.url }}" title="{{ item.title }}" target="_blank" rel="noopener noreferrer">
+            <a href="{{ item.url }}" title="{{ item.title }}" aria-label="{{ item.title }}" target="_blank" rel="noopener noreferrer">
               {%- if item.icon -%}
                 <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor; display: block;">
                   {%- if item.icon == 'github' -%}
@@ -95,22 +100,33 @@
     </div>
   </header>
 
-  <!-- 2. Workspace Layout with Left Gutter -->
-  <div class="workspace-container">
-    <!-- Left Gutter for Line Numbers -->
-    <div class="line-gutter">
-      <!-- Populated dynamically by sketchbook.js -->
+  <div class="ide-layout">
+    <aside class="file-explorer" aria-label="Explorador de archivos">
+      <div class="explorer-heading">EXPLORADOR <span aria-hidden="true">···</span></div>
+      <div class="explorer-project"><span aria-hidden="true">⌄</span> DEVCITO-BLOG</div>
+      <nav aria-label="Archivos del blog">
+        <a class="explorer-link {% if page.url == '/' %}current{% endif %}" href="{{ '/' | relative_url }}"><span class="file-icon">M</span> README.md</a>
+        <a class="explorer-link {% if page.url == '/archive.html' or page.url == '/archive/' %}current{% endif %}" href="{{ '/archive/' | relative_url }}"><span class="file-icon html-icon">&lt;/&gt;</span> archive.html</a>
+        <div class="explorer-folder"><span aria-hidden="true">⌄</span> _posts</div>
+        {% for post in site.posts %}
+          <a class="explorer-link explorer-post {% if page.url == post.url %}current{% endif %}" href="{{ post.url | relative_url }}" title="{{ post.title | escape }}"{% if page.url == post.url %} aria-current="page"{% endif %}><span class="file-icon">M</span><span>{{ post.slug }}.md</span></a>
+        {% endfor %}
+      </nav>
+      <div class="explorer-bottom"><span class="status-dot"></span> {{ site.posts | size }} artículos</div>
+    </aside>
+
+    <div class="workspace-container">
+      <div class="line-gutter" aria-hidden="true"></div>
+      <main class="main-content">
+        {{ content }}
+      </main>
     </div>
-    
-    <!-- Main Content Area -->
-    <main class="main-content">
-      {{ content }}
-    </main>
   </div>
 
   <footer class="site-footer">
     <div class="footer-container">
-      <p>Hecho con ❤️ por <a href="https://devcito.org" target="_blank" rel="noopener noreferrer" style="color: var(--color-orange); text-decoration: underline;">devcito</a></p>
+      <p><span class="footer-prompt">&gt;_</span> Hecho con ❤️ por <a href="https://devcito.org" target="_blank" rel="noopener noreferrer">devcito</a></p>
+      <span class="footer-status"><span class="status-dot"></span> ALL SYSTEMS OPERATIONAL</span>
     </div>
   </footer>
 
